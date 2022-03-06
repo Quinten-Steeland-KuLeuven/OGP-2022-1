@@ -1,4 +1,3 @@
-
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
 
@@ -60,7 +59,8 @@ public class File {
      * Returns the size of the File object
      * @return size
      */
-    @Basic @Raw
+    @Basic
+    @Raw
     public int getSize() {
         return this.size;
     }
