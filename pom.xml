@@ -26,11 +26,11 @@
         </dependency>
 
         <dependency>
-            <groupId>anything</groupId>
-            <artifactId>anything</artifactId>
-            <version>anything</version>
+            <groupId>be.kuleuven.cs</groupId>
+            <artifactId>som</artifactId>
+            <version>use-latest-releases</version>
             <scope>system</scope>
-            <systemPath>${basedir}/lib/AnnotationsDoclets_v17.jar</systemPath>
+            <systemPath>${pom.basedir}/src/resources/AnnotationsDoclets_v17.jar</systemPath>
         </dependency>
 
 	</dependencies>
