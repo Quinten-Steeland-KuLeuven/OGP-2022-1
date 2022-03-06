@@ -10,7 +10,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="OGP-2022-1" target="1.8" />
+      <module name="junit5-jupiter-starter-maven" target="17" />
+      <module name="OGP-2022-1" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

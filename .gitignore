@@ -1,3 +1,9 @@
+#.directory files
+.directory
+
+#temp directory
+tmp/
+
 # Compiled class file
 *.class
 

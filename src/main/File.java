@@ -1,6 +1,6 @@
-import be.kuleuven.cs.som.annotate.Basic;
+//import be.kuleuven.cs.som.annotate.*;
 
-import java.beans.BeanProperty;
+//import be.kuleuven.cs.som.annotate.Basic;
 
 /**
  * the file class has the following objects: name, size, creation_time, modification_time, writable
@@ -8,7 +8,7 @@ import java.beans.BeanProperty;
  * @version 1.0
  * @author Robbe Vanslambrouck
  * @author Quinten Steeland
- * @author
+ * @author ...
  */
 
 public class File {
@@ -31,7 +31,7 @@ public class File {
      * @return  name:
      *          name of the file
      */
-    @Basic
+    //@Basic
     public String getName() {
         return name;
     }
