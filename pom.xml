@@ -5,7 +5,7 @@
 
 	<groupId>OGP-2022-1</groupId>
 	<artifactId>OGP-2022-1</artifactId>
-	<version>1.0.0-a1</version>
+	<version>1.0.0-a0</version>
     <packaging>jar</packaging>
 
 	<properties>
@@ -15,6 +15,7 @@
 	</properties>
 
 	<dependencyManagement>
+
 	</dependencyManagement>
 
 	<dependencies>
@@ -24,7 +25,13 @@
             <version>4.13.2</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>anything</groupId>
+            <artifactId>anything</artifactId>
+            <version>anything</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/AnnotationsDoclets_v17.jar</systemPath>
+        </dependency>
 
 	</dependencies>
 
@@ -35,6 +42,9 @@
         <resources>
           <resource>
             <directory>${project.basedir}/src/resources</directory>
+          </resource>
+          <resource>
+              <directory>${project.basedir}/lib</directory>
           </resource>
         </resources>
 
