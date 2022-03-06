@@ -27,6 +27,12 @@ public class FileTest {
     }
 
     @Test
+    public void testSemiIllegalName() {
+        file1.setName("A@2");
+        assertEquals(file1.getName(), "A2");
+    }
+
+    @Test
     public void testNormalName() {
         file1.setName("Aa_1.2-3");
         assertEquals(file1.getName(), "Aa_1.2-3");
