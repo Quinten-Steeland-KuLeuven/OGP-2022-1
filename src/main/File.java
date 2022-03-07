@@ -22,6 +22,9 @@ public class File {
     private String name;
     private int size;
 
+    //
+    private boolean writable;
+
     // constructors
 
     public File (String filename) {
@@ -48,12 +51,15 @@ public class File {
      * @post    if the name is valid, the name will be changed to the input name
      *          any invalid characters will be filtered out
      *          if the name is empty it will be set to "."
+     *          if there are no write permissions, the name will not change
      */
     public void setName(String name) {
-        String filteredName = name.replaceAll("[^a-zA-Z0-9._\\-]","");
-        if (filteredName.equals(""))
-            filteredName = ".";
-        this.name = filteredName;
+        if (writable) {
+            String filteredName = name.replaceAll("[^a-zA-Z0-9._\\-]", "");
+            if (filteredName.equals(""))
+                filteredName = ".";
+            this.name = filteredName;
+        }
     }
 
     /**
