@@ -1,6 +1,11 @@
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
 
 /**
  * the file class has the following objects: name, size, creation_time, modification_time, writable
@@ -12,6 +17,8 @@ import be.kuleuven.cs.som.annotate.Raw;
  * @author ...
  */
 
+//TODO (1) = aanpassen aan implementatie Wout
+
 public class File {
 
     // constants
@@ -21,39 +28,89 @@ public class File {
     // class objects
     private String name;
     private int size;
+    private final long creationEpoch;
+    private long modificationEpoch;
+
+    //TODO (1)
+    private boolean writable;
 
     // constructors
 
     public File (String filename) {
         this.setName(filename);
         this.setSize(0);
+        //TODO (1)
+        this.writable = true;
+        this.creationEpoch = getCurrentEpoch();
+        this.modificationEpoch = -1;
     }
 
     // getters & setters
 
     /**
-     *  get name of file
-     * @return  name:
-     *          name of the file
+     * Getter for creation epoch
+     * @return  creationEpoch:
+     *          the epoch of the time the file was created
      */
-    //@Basic
+    @Basic
+    private long getCreationEpoch() {
+        return this.creationEpoch;
+    }
+
+    /**
+     * Setter for the modification epoch
+     * @param   modificationEpoch:
+     *          The epoch of when the file was modified.
+     */
+    @Basic
+    private void setModificationEpoch(long modificationEpoch) {
+        this.modificationEpoch = modificationEpoch;
+    }
+
+    public String getCreationTime() {
+        return epochToHumanReadable(getCreationEpoch());
+    }
+
+    private long getModificationEpoch() {
+        return this.modificationEpoch;
+    }
+
+    public String getModificationTime() {
+        if (getModificationEpoch() < 0) {
+            return "File has not been modified yet.";
+        } else {
+            return epochToHumanReadable(getModificationEpoch());
+        }
+    }
+
+    /**
+     * Returns name of File object.
+     * @return  name
+     *          the name of the file
+     */
+    @Basic
     public String getName() {
         return name;
     }
 
     /**
      * sets name of file
-     * @param   name:
-     *          name of the file
+     * @param   name
+     *          the name of the file
      * @post    if the name is valid, the name will be changed to the input name
      *          any invalid characters will be filtered out
      *          if the name is empty it will be set to "."
+     *          if there are no write permissions, the name will not change
      */
     public void setName(String name) {
-        String filteredName = name.replaceAll("[^a-zA-Z0-9._\\-]","");
-        if (filteredName.equals(""))
-            filteredName = ".";
-        this.name = filteredName;
+        //TODO (1)
+        if (writable) {
+            String filteredName = name.replaceAll("[^a-zA-Z0-9._\\-]", "");
+            if (filteredName.equals(""))
+                filteredName = ".";
+            this.name = filteredName;
+            updateModificationEpoch();
+        }
     }
 
     /**
@@ -116,5 +173,42 @@ public class File {
     @Raw
     public boolean isValidSize(int size) {
         return size >= MIN_SIZE && size <= MAX_SIZE;
+    }
+
+    /**
+     *
+     * Check if two files have an overlapping use period.
+     * WARNING: if the first file is modified within the millisecond that the second file is created,
+     *          the function may return false when it should return true!
+     * @param   otherFile:
+     *          the file to compare with
+     * @return  boolean:
+     *          true if overlapping use period, false if not.
+     */
+    public boolean hasOverlappingUsePeriod(File otherFile) {
+        if (this.getCreationEpoch() < otherFile.getCreationEpoch()) {
+            return  this.getCreationEpoch() <= otherFile.getCreationEpoch() &&
+                    otherFile.getCreationEpoch() < this.getModificationEpoch() &&
+                    otherFile.getModificationEpoch() >= 0;
+        } else {
+            return  otherFile.getCreationEpoch() <= this.getCreationEpoch() &&
+                    this.getCreationEpoch() < otherFile.getModificationEpoch() &&
+                    this.getModificationEpoch() >= 0;
+        }
+    }
+
+    //
+    private void updateModificationEpoch(){
+        setModificationEpoch(getCurrentEpoch());
+    }
+
+    private Long getCurrentEpoch(){
+        return System.currentTimeMillis();
+    }
+
+    private String epochToHumanReadable(long epoch){
+        LocalDateTime myDateObj = LocalDateTime.ofInstant(Instant.ofEpochMilli(epoch), ZoneId.systemDefault());
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return myDateObj.format(myFormatObj);
     }
 }
