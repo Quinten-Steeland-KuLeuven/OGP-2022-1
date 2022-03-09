@@ -64,7 +64,7 @@ public class File {
     public File (String filename) {
         this.setName(filename);
         this.setSize(0);
-        this.setWritable(writable);
+        this.setWritable(true);
         this.creationEpoch = getCurrentEpoch();
         this.modificationEpoch = -1;
     }
