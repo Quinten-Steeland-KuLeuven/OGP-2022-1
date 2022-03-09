@@ -36,7 +36,7 @@ public class FileTest {
         File fileLocal = new File("name");
         assertEquals(fileLocal.getName(), "name");
         assertEquals(fileLocal.getSize(), 0);
-        assertEquals(fileLocal.isWritable(), true);
+        assertTrue(fileLocal.isWritable());
     }
 
     //writable tests
@@ -44,20 +44,20 @@ public class FileTest {
     @Test
     public void test_a_TurnOffWritePermission() {
         file1.setWritable(false);
-        assertEquals(file1.isWritable(),true);
+        assertFalse(file1.isWritable());
 
     }
 
     @Test
     public void test_a_TurnOnWritePermission() {
         file2.setWritable(true);
-        assertEquals(file2.isWritable(),true);
+        assertTrue(file2.isWritable());
     }
 
     @Test
     public void test_a_NoChangeWritePermission() {
         file1.setWritable(true);
-        assertEquals(file1.isWritable(),true);
+        assertTrue(file1.isWritable());
     }
 
     //Filename tests

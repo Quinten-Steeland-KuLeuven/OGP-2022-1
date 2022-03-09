@@ -231,7 +231,7 @@ public class File {
     public boolean isWritable() {
         return this.writable;
     }
-    private void setWritable(boolean bool){
+    public void setWritable(boolean bool){
         this.writable = bool;
     }
     /**
