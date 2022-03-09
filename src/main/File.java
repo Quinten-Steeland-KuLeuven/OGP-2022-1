@@ -17,8 +17,6 @@ import java.time.format.DateTimeFormatter;
  * @author Wout Voet
  */
 
-//TODO (1) = aanpassen aan implementatie Wout
-
 public class File {
 
     // constants
@@ -66,8 +64,7 @@ public class File {
     public File (String filename, boolean writable) {
         this.setName(filename);
         this.setSize(0);
-        //TODO (1)
-        this.writable = true;
+        this.writable = writable;
         this.creationEpoch = getCurrentEpoch();
         this.modificationEpoch = -1;
     }

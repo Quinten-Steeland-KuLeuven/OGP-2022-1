@@ -76,7 +76,7 @@ public class FileTest {
 
     @Test
     public void test_n_UseOverlapOne() {
-        File file3 = new File("3");
+        File file3 = new File("3", true);
         //sleep so creationTime is different from modificationTime
         try {
             TimeUnit.MILLISECONDS.sleep(2);
@@ -91,7 +91,7 @@ public class FileTest {
 
     @Test
     public void test_n_UseOverlapTwo() {
-        File file3 = new File("3");
+        File file3 = new File("3", true);
         //sleep so creationTime is different from modificationTime
         try {
             TimeUnit.MILLISECONDS.sleep(2);
@@ -113,7 +113,7 @@ public class FileTest {
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
         }
-        File file3 = new File("3");
+        File file3 = new File("3", true);
 
         file3.setName("change2");
 
@@ -129,7 +129,7 @@ public class FileTest {
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
         }
-        File file3 = new File("3");
+        File file3 = new File("3", true);
 
         file3.setName("change2");
 
@@ -143,7 +143,7 @@ public class FileTest {
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
         }
-        File file3 = new File("3");
+        File file3 = new File("3", true);
         //sleep so creationTime is different from modificationTime
         try {
             TimeUnit.MILLISECONDS.sleep(2);
@@ -163,7 +163,7 @@ public class FileTest {
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
         }
-        File file3 = new File("3");
+        File file3 = new File("3", true);
         //sleep so creationTime is different from modificationTime
         try {
             TimeUnit.MILLISECONDS.sleep(2);
@@ -178,7 +178,7 @@ public class FileTest {
 
     @Test
     public void test_n_UseOverlapNoModification() {
-        File file3 = new File("3");
+        File file3 = new File("3", true);
         //sleep
         try {
             TimeUnit.MILLISECONDS.sleep(2);
@@ -192,7 +192,7 @@ public class FileTest {
 
     @Test
     public void test_a_NoOverlap() {
-        File file3 = new File("3");
+        File file3 = new File("3", true);
         file3.setName("change");
 
         assertFalse(file3.hasOverlappingUsePeriod(file1));
