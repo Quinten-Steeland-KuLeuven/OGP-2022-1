@@ -36,6 +36,15 @@ public class File {
 
     // constructors
 
+    public File(String filename, int size, boolean writable){
+        this.setName(filename);
+        this.setSize(size);
+        this.writable = writable;
+        this.creationEpoch = getCurrentEpoch();
+        this.modificationEpoch = -1;
+
+    }
+
     public File (String filename) {
         this.setName(filename);
         this.setSize(0);
