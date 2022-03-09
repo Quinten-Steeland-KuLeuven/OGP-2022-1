@@ -49,7 +49,7 @@ public class File {
     public File(String filename, int size, boolean writable){
         this.setName(filename);
         this.setSize(size);
-        this.writable = writable;
+        this.setWritable(writable);
         this.creationEpoch = getCurrentEpoch();
         this.modificationEpoch = -1;
 
@@ -64,7 +64,7 @@ public class File {
     public File (String filename, boolean writable) {
         this.setName(filename);
         this.setSize(0);
-        this.writable = writable;
+        this.setWritable(writable);
         this.creationEpoch = getCurrentEpoch();
         this.modificationEpoch = -1;
     }
@@ -227,6 +227,9 @@ public class File {
      */
     public boolean isWritable() {
         return this.writable;
+    }
+    private void setWritable(boolean bool){
+        this.writable = bool;
     }
     /**
      *
