@@ -17,7 +17,7 @@ public class File {
     // constants
     private static final int MAX_SIZE = Integer.MAX_VALUE;
     private static final int MIN_SIZE = 0;
-    private boolean Writable;
+    private boolean writable;
     // class objects
     private String name;
     private int size;
@@ -26,7 +26,7 @@ public class File {
     public File (String filename, boolean writable) {
         this.setName(filename);
         this.setSize(0);
-        this.Writable = writable;
+        this.writable = writable;
     }
 
     // getters & setters
@@ -123,7 +123,7 @@ public class File {
      * @return True if file Writable, False if Read only
      */
     public boolean isWritable() {
-        return this.Writable;
+        return this.writable;
     }
 
 
