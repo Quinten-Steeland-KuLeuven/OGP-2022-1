@@ -26,8 +26,8 @@ public class FileTest {
 
     @Before
     public void runBeforeEveryTest() {
-        file1 = new File("filename");
-        file2 = new File("file_2");
+        file1 = new File("filename", true);
+        file2 = new File("file_2", true);
     }
 
 

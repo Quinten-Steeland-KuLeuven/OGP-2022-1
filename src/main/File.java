@@ -37,10 +37,6 @@ public class File {
     private final long creationEpoch;
     /** Epoch of file modification time. */
     private long modificationEpoch;
-
-    //TODO (1)
-    private boolean writable;
-
     // constructors
 
     /**
@@ -235,10 +231,7 @@ public class File {
     public boolean isWritable() {
         return this.writable;
     }
-
-
-    }
-
+    /**
      *
      * Check if two files have an overlapping use period.
      * WARNING: if the first file is modified within the millisecond that the second file is created,
