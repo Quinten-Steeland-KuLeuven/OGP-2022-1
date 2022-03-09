@@ -11,6 +11,8 @@ import java.time.format.DateTimeFormatter;
  * The file class has the following objects: name, size, creation_time, modification_time, writable.
  * @invar The File size must be valid.
  *        | isValidSize(getSize())
+ * @invar The File must be writable.
+ *        | isWritable()
  * @version 1.0
  * @author Robbe Vanslambrouck
  * @author Quinten Steeland
@@ -24,7 +26,7 @@ public class File {
     private static final int MAX_SIZE = Integer.MAX_VALUE;
     /** Minimum size of a file. */
     private static final int MIN_SIZE = 0;
-    /** Boolean that shows if file is writable or read-only */
+    /** Boolean that shows if file is writable or read-only. */
     private boolean writable = true;
     // class objects
     /** Name of the file. */
@@ -173,8 +175,10 @@ public class File {
      *
      * @param size
      * the new size of this File
-     * @pre the size specified is a valid File size.
-     *      | isValidSize(size)
+     * @pre  the size specified is a valid File size.
+     *       | isValidSize(size)
+     * @pre  the file must be writable.
+     *       | isWritable()
      * @post the size of this File are set to the given parameter size.
      *       | new.getSize() == size
      */

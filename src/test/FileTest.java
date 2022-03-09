@@ -27,11 +27,47 @@ public class FileTest {
     @Before
     public void runBeforeEveryTest() {
         file1 = new File("filename");
-        file2 = new File("file_2");
+        file2 = new File("file_2", 0, false);
     }
 
+    //constructor tests
+    @Test
+    public void test_a_ConstructorOne(){
+        File fileLocal = new File("name");
+        assertEquals(fileLocal.getName(), "name");
+        assertEquals(fileLocal.getSize(), 0);
+        assertEquals(fileLocal.isWritable(), true);
+    }
+
+    //writable tests
+
+    @Test
+    public void test_a_TurnOffWritePermission() {
+        file1.setWritable(false);
+        assertEquals(file1.isWritable(),true);
+
+    }
+
+    @Test
+    public void test_a_TurnOnWritePermission() {
+        file2.setWritable(true);
+        assertEquals(file2.isWritable(),true);
+    }
+
+    @Test
+    public void test_a_NoChangeWritePermission() {
+        file1.setWritable(true);
+        assertEquals(file1.isWritable(),true);
+    }
 
     //Filename tests
+    @Test
+    public void test_a_ChangeNameNoPermission() {
+        String name = file2.getName();
+        file2.setName("different_");
+        assertEquals(file2.getName(), name);
+    }
+
     @Test
     public void test_a_EmptyName() {
         file1.setName("");
@@ -76,7 +112,7 @@ public class FileTest {
 
     @Test
     public void test_n_UseOverlapOne() {
-        File file3 = new File("3");
+        File fileLocal = new File("3");
         //sleep so creationTime is different from modificationTime
         try {
             TimeUnit.MILLISECONDS.sleep(2);
@@ -84,14 +120,14 @@ public class FileTest {
             Thread.currentThread().interrupt();
         }
         file1.setName("change");
-        file3.setName("change2");
+        fileLocal.setName("change2");
 
-        assertTrue(file1.hasOverlappingUsePeriod(file3));
+        assertTrue(file1.hasOverlappingUsePeriod(fileLocal));
     }
 
     @Test
     public void test_n_UseOverlapTwo() {
-        File file3 = new File("3");
+        File fileLocal = new File("3");
         //sleep so creationTime is different from modificationTime
         try {
             TimeUnit.MILLISECONDS.sleep(2);
@@ -99,9 +135,9 @@ public class FileTest {
             Thread.currentThread().interrupt();
         }
         file1.setName("change");
-        file3.setName("change2");
+        fileLocal.setName("change2");
 
-        assertTrue(file3.hasOverlappingUsePeriod(file1));
+        assertTrue(fileLocal.hasOverlappingUsePeriod(file1));
     }
 
     @Test
@@ -113,11 +149,11 @@ public class FileTest {
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
         }
-        File file3 = new File("3");
+        File fileLocal = new File("3");
 
-        file3.setName("change2");
+        fileLocal.setName("change2");
 
-        assertFalse(file1.hasOverlappingUsePeriod(file3));
+        assertFalse(file1.hasOverlappingUsePeriod(fileLocal));
     }
 
     @Test
@@ -129,11 +165,11 @@ public class FileTest {
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
         }
-        File file3 = new File("3");
+        File fileLocal = new File("3");
 
-        file3.setName("change2");
+        fileLocal.setName("change2");
 
-        assertFalse(file3.hasOverlappingUsePeriod(file1));
+        assertFalse(fileLocal.hasOverlappingUsePeriod(file1));
     }
 
     @Test
@@ -143,7 +179,7 @@ public class FileTest {
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
         }
-        File file3 = new File("3");
+        File fileLocal = new File("3");
         //sleep so creationTime is different from modificationTime
         try {
             TimeUnit.MILLISECONDS.sleep(2);
@@ -151,9 +187,9 @@ public class FileTest {
             Thread.currentThread().interrupt();
         }
         file1.setName("change");
-        file3.setName("change2");
+        fileLocal.setName("change2");
 
-        assertTrue(file1.hasOverlappingUsePeriod(file3));
+        assertTrue(file1.hasOverlappingUsePeriod(fileLocal));
     }
 
     @Test
@@ -163,7 +199,7 @@ public class FileTest {
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
         }
-        File file3 = new File("3");
+        File fileLocal = new File("3");
         //sleep so creationTime is different from modificationTime
         try {
             TimeUnit.MILLISECONDS.sleep(2);
@@ -171,14 +207,14 @@ public class FileTest {
             Thread.currentThread().interrupt();
         }
         file1.setName("change");
-        file3.setName("change2");
+        fileLocal.setName("change2");
 
-        assertTrue(file3.hasOverlappingUsePeriod(file1));
+        assertTrue(fileLocal.hasOverlappingUsePeriod(file1));
     }
 
     @Test
     public void test_n_UseOverlapNoModification() {
-        File file3 = new File("3");
+        File fileLocal = new File("3");
         //sleep
         try {
             TimeUnit.MILLISECONDS.sleep(2);
@@ -187,15 +223,15 @@ public class FileTest {
         }
         file1.setName("change");
 
-        assertFalse(file3.hasOverlappingUsePeriod(file1));
+        assertFalse(fileLocal.hasOverlappingUsePeriod(file1));
     }
 
     @Test
     public void test_a_NoOverlap() {
-        File file3 = new File("3");
-        file3.setName("change");
+        File fileLocal = new File("3");
+        fileLocal.setName("change");
 
-        assertFalse(file3.hasOverlappingUsePeriod(file1));
+        assertFalse(fileLocal.hasOverlappingUsePeriod(file1));
     }
 
     @Test
