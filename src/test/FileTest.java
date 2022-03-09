@@ -11,7 +11,7 @@ public class FileTest {
 
     @Before
     public void runBeforeEveryTest() {
-        file1 = new File("filename");
+        file1 = new File("filename", true);
     }
 
     @Test

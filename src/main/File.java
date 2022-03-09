@@ -9,7 +9,7 @@ import be.kuleuven.cs.som.annotate.Raw;
  * @version 1.0
  * @author Robbe Vanslambrouck
  * @author Quinten Steeland
- * @author ...
+ * @author Wout Voet
  */
 
 public class File {
@@ -17,14 +17,12 @@ public class File {
     // constants
     private static final int MAX_SIZE = Integer.MAX_VALUE;
     private static final int MIN_SIZE = 0;
-
     // class objects
     private String name;
     private int size;
-
     // constructors
 
-    public File (String filename) {
+    public File (String filename, final boolean Writable) {
         this.setName(filename);
         this.setSize(0);
     }
@@ -117,4 +115,15 @@ public class File {
     public boolean isValidSize(int size) {
         return size >= MIN_SIZE && size <= MAX_SIZE;
     }
-}
+
+    /**
+     * Checks if File is Writable or Read only
+     * @return True if file Writable, False if Read only
+     */
+    public boolean isWritable() {
+        return Writable;
+    }
+
+
+    }
+
