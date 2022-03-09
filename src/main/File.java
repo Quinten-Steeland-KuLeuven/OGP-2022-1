@@ -61,10 +61,10 @@ public class File {
      * @param   filename:
      *          Name of the file.
      */
-    public File (String filename, boolean writable) {
+    public File (String filename) {
         this.setName(filename);
         this.setSize(0);
-        this.writable = writable;
+        this.writable = true;
         this.creationEpoch = getCurrentEpoch();
         this.modificationEpoch = -1;
     }
@@ -149,8 +149,7 @@ public class File {
      *          If there are no write permissions, the name will not change.
      */
     public void setName(String name) {
-        //TODO (1)
-        if (writable) {
+        if (this.isWritable()) {
             String filteredName = name.replaceAll("[^a-zA-Z0-9._\\-]", "");
             if (filteredName.equals(""))
                 filteredName = ".";
@@ -222,8 +221,8 @@ public class File {
     }
 
     /**
-     * Checks if File is Writable or Read only
-     * @return True if file Writable, False if Read only
+     * Checks if File is Writable or Read only.
+     * @return True if file Writable, False if Read only.
      */
     public boolean isWritable() {
         return this.writable;
